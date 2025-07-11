@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestEM - Descubre tu Potencial Emprendedor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light background */
+            color: #343a40; /* Dark text */
+        }
+        .gradient-bg {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+        }
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #2575fc;
+            border-radius: 9999px;
+        }
+        /* Custom spinner for loading state */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2575fc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white py-20 px-4 sm:px-6 lg:px-8 text-center rounded-b-3xl shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl sm:text-6xl font-bold mb-4 leading-tight">TestEM</h1>
+            <p class="text-xl sm:text-2xl mb-8 opacity-90">
+                Descubre tus intereses, habilidades y recursos para encontrar tu idea de emprendimiento ideal.
+            </p>
+            <a href="#test-section" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-100 hover:scale-105 transition duration-300 ease-in-out">
+                ¡Haz tu Test Ahora!
+            </a>
+        </div>
+    </header>
+
+    <!-- How It Works Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
+        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">¿Cómo funciona TestEM?</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-blue-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-5xl mb-4">📝</div>
+                <h3 class="text-2xl font-semibold mb-3 text-blue-700">1. Test Rápido</h3>
+                <p class="text-gray-700">
+                    Realiza un test de 10-15 minutos sobre tus intereses, habilidades, experiencias y contexto personal.
+                </p>
+            </div>
+            <!-- Step 2 -->
+            <div class="bg-green-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-5xl mb-4">🧠</div>
+                <h3 class="text-2xl font-semibold mb-3 text-green-700">2. Análisis de Perfil</h3>
+                <p class="text-gray-700">
+                    Nuestro sistema analiza tus respuestas con algoritmos simples para crear tu perfil único.
+                </p>
+            </div>
+            <!-- Step 3 -->
+            <div class="bg-purple-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-5xl mb-4">💡</div>
+                <h3 class="text-2xl font-semibold mb-3 text-purple-700">3. Recomendaciones Personalizadas</h3>
+                <p class="text-gray-700">
+                    Recibe de 3 a 5 ideas de emprendimiento realistas, con descripciones y recursos gratuitos.
+                </p>
+            </div>
+            <!-- Step 4 -->
+            <div class="bg-yellow-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-5xl mb-4">🤝</div>
+                <h3 class="text-2xl font-semibold mb-3 text-yellow-700">4. Comunidad Opcional</h3>
+                <p class="text-gray-700">
+                    Accede a una comunidad de jóvenes emprendedores con mentorías y retos mensuales.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Result Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100 rounded-lg shadow-md mx-auto my-12 max-w-6xl">
+        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">Ejemplo de Resultado</h2>
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+            <p class="text-lg mb-4">Imagina un perfil con:</p>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li><span class="font-semibold text-blue-600">Intereses:</span> Cocina, redes sociales, impacto social</li>
+                <li><span class="font-semibold text-blue-600">Habilidades:</span> Creatividad, fotografía, comunicación</li>
+                <li><span class="font-semibold text-blue-600">Recurso clave:</span> Celular con buena cámara</li>
+            </ul>
+            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 shadow-inner">
+                <p class="text-xl font-semibold text-blue-800 mb-3">🔍 Idea Sugerida:</p>
+                <p class="text-lg text-gray-800">
+                    Miniemprendimiento de snacks saludables con marketing en TikTok y ventas en ferias escolares.
+                </p>
+            </div>
+            <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500 shadow-inner mt-6">
+                <p class="text-xl font-semibold text-green-800 mb-3">📚 Siguiente Paso:</p>
+                <p class="text-lg text-gray-800">
+                    Curso gratis de Canva + tutorial de empaque ecológico.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test-section" class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
+        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">¡Haz tu Test TestEM!</h2>
+
+        <div id="test-intro" class="text-center">
+            <p class="text-lg mb-8">
+                Este test te ayudará a descubrir ideas de emprendimiento personalizadas. ¡Es rápido y divertido!
+            </p>
+            <button id="start-test-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 ease-in-out">
+                Comenzar Test
+            </button>
+        </div>
+
+        <form id="test-form" class="hidden mt-8 p-6 bg-gray-50 rounded-xl shadow-inner">
+            <!-- Interests -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-semibold mb-4 text-blue-700">1. ¿Cuáles son tus intereses principales? (Selecciona todos los que apliquen)</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="tecnologia" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Tecnología</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="arte" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Arte y Diseño</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="cocina" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Cocina y Gastronomía</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="deportes" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Deportes y Bienestar</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="impacto social" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Impacto Social / Ayuda</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
+                        <input type="checkbox" name="interests" value="redes sociales" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Redes Sociales / Marketing Digital</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-semibold mb-4 text-green-700">2. ¿Qué habilidades te describen mejor? (Selecciona todos los que apliquen)</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
+                        <input type="checkbox" name="skills" value="comunicacion" class="form-checkbox h-5 w-5 text-green-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Comunicación</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
+                        <input type="checkbox" name="skills" value="creatividad" class="form-checkbox h-5 w-5 text-green-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Creatividad</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
+                        <input type="checkbox" name="skills" value="liderazgo" class="form-checkbox h-5 w-5 text-green-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Liderazgo</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
+                        <input type="checkbox" name="skills" value="logica" class="form-checkbox h-5 w-5 text-green-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Lógica / Resolución de Problemas</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
+                        <input type="checkbox" name="skills" value="fotografia" class="form-checkbox h-5 w-5 text-green-600 rounded">
+                        <span class="ml-3 text-lg text-gray-800">Fotografía / Edición de Video</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-semibold mb-4 text-purple-700">3. ¿Qué recursos tienes disponibles?</h3>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-lg mb-2 text-gray-800">¿Tienes un celular con buena cámara?</p>
+                        <label class="inline-flex items-center mr-4">
+                            <input type="radio" name="camera" value="si" class="form-radio h-5 w-5 text-purple-600">
+                            <span class="ml-2 text-lg text-gray-800">Sí</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="camera" value="no" class="form-radio h-5 w-5 text-purple-600">
+                            <span class="ml-2 text-lg text-gray-800">No</span>
+                        </label>
+                    </div>
+                    <div>
+                        <p class="text-lg mb-2 text-gray-800">¿Tienes acceso a internet confiable?</p>
+                        <label class="inline-flex items-center mr-4">
+                            <input type="radio" name="internet" value="si" class="form-radio h-5 w-5 text-purple-600">
+                            <span class="ml-2 text-lg text-gray-800">Sí</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="internet" value="no" class="form-radio h-5 w-5 text-purple-600">
+                            <span class="ml-2 text-lg text-gray-800">No</span>
+                        </label>
+                    </div>
+                    <div>
+                        <p class="text-lg mb-2 text-gray-800">¿Cuánto tiempo puedes dedicar a un emprendimiento?</p>
+                        <select name="time" class="block w-full sm:w-1/2 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg text-gray-800">
+                            <option value="">Selecciona una opción</option>
+                            <option value="poco">Poco (menos de 5 horas/semana)</option>
+                            <option value="moderado">Moderado (5-15 horas/semana)</option>
+                            <option value="mucho">Mucho (más de 15 horas/semana)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-700 hover:scale-105 transition duration-300 ease-in-out">
+                    Ver mis Recomendaciones
+                </button>
+            </div>
+        </form>
+
+        <!-- Loading and Results Section -->
+        <div id="test-loading" class="hidden text-center mt-8 p-6 bg-blue-50 rounded-xl shadow-inner">
+            <div class="spinner mx-auto mb-4"></div>
+            <p class="text-xl font-semibold text-blue-700">Analizando tu perfil...</p>
+            <p class="text-gray-700">Esto puede tardar unos segundos.</p>
+        </div>
+
+        <div id="test-results" class="hidden mt-8 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+            <h3 class="text-3xl font-bold text-center mb-6 text-blue-800">Tus Recomendaciones Personalizadas</h3>
+            <div id="result-content">
+                <!-- Results will be injected here by JavaScript -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="retake-test-btn" class="bg-gray-400 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-500 transition duration-300 ease-in-out">
+                    Volver a hacer el Test
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
+        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">Ventajas del Proyecto</h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="flex items-start bg-purple-50 p-6 rounded-xl shadow-md">
+                <div class="text-3xl text-purple-600 mr-4 mt-1">💰</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-purple-700">Bajo Costo de Desarrollo</h3>
+                    <p class="text-gray-700">Se puede iniciar con herramientas gratuitas como Google Forms o Typeform.</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-red-50 p-6 rounded-xl shadow-md">
+                <div class="text-3xl text-red-600 mr-4 mt-1">🏫</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-red-700">Adaptable y Versátil</h3>
+                    <p class="text-gray-700">Ideal para colegios, institutos y programas sociales.</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-teal-50 p-6 rounded-xl shadow-md">
+                <div class="text-3xl text-teal-600 mr-4 mt-1">✨</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-teal-700">Fomenta la Autoconfianza</h3>
+                    <p class="text-gray-700">Facilita la orientación vocacional hacia el emprendimiento.</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-indigo-50 p-6 rounded-xl shadow-md">
+                <div class="text-3xl text-indigo-600 mr-4 mt-1">📈</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-indigo-700">Potencial de Escalabilidad</h3>
+                    <p class="text-gray-700">Capacidad para crecer a niveles regionales o nacionales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 text-center rounded-t-3xl shadow-lg mt-12">
+        <p>&copy; 2025 TestEM. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startTestBtn = document.getElementById('start-test-btn');
+            const testIntro = document.getElementById('test-intro');
+            const testForm = document.getElementById('test-form');
+            const testLoading = document.getElementById('test-loading');
+            const testResults = document.getElementById('test-results');
+            const resultContent = document.getElementById('result-content');
+            const retakeTestBtn = document.getElementById('retake-test-btn');
+
+            // Show the test form when "Comenzar Test" is clicked
+            startTestBtn.addEventListener('click', () => {
+                testIntro.classList.add('hidden');
+                testForm.classList.remove('hidden');
+                // Scroll to the test section
+                document.getElementById('test-section').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Handle test form submission
+            testForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                testForm.classList.add('hidden');
+                testLoading.classList.remove('hidden');
+
+                // Simulate API call or complex analysis with a delay
+                setTimeout(() => {
+                    const formData = new FormData(testForm);
+                    const interests = formData.getAll('interests');
+                    const skills = formData.getAll('skills');
+      
