@@ -3,335 +3,1208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestEM - Descubre tu Potencial Emprendedor</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>PRO ADMIN - Tu Impulso Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <style>
+        /* Estilos generales y reseteo */
+        :root {
+            --primary-color: #FF1493; /* Rosa Vibrante */
+            --secondary-color: #8A2BE2; /* Azul Violeta */
+            --accent-color: #39FF14; /* Verde Neón */
+            --dark-color: #1a1a2e; /* Azul Oscuro Profundo */
+            --light-color: #e0f7fa; /* Azul Claro Cálido */
+            --white-color: #ffffff;
+            --gradient-start: #FFD700; /* Oro Brillante */
+            --gradient-end: #FF4500; /* Naranja Rojo Vibrante */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Light background */
-            color: #343a40; /* Dark text */
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden; /* Evita scroll horizontal */
+            scroll-behavior: smooth; /* Scroll suave para anclas */
+            font-size: 1.1em; /* Agrandar un poco el texto base */
         }
-        .gradient-bg {
-            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
-        .section-heading {
-            position: relative;
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        h1 { font-size: 3.5em; } /* Agrandar h1 */
+        h2 { font-size: 2.8em; } /* Agrandar h2 */
+        h3 { font-size: 2.2em; } /* Agrandar h3 */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 2rem;
+            overflow: hidden; /* Limpia floats */
+        }
+
+        .btn {
             display: inline-block;
-            padding-bottom: 8px;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transición para hover */
         }
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: #2575fc;
-            border-radius: 9999px;
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05); /* Efecto de escala al hacer hover */
         }
-        /* Custom spinner for loading state */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #2575fc;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9em;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--white-color);
+            color: var(--dark-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: none; /* Oculto por defecto, se muestra con JS después del login */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .navbar.visible {
+            display: flex; /* Usar flex para centrado */
+            opacity: 1;
+        }
+
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar ul {
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: var(--dark-color);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+        }
+
+        .navbar ul li a:hover, .navbar ul li a.active-link {
+            color: var(--white-color);
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        /* Main Content Wrapper (oculto por defecto hasta el login) */
+        #main-wrapper {
+            display: none; /* Oculto hasta que el usuario se loguee */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #main-wrapper.visible {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* Secciones de Contenido Individuales */
+        .content-section {
+            display: none; /* Todas las secciones de contenido están ocultas por defecto */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            min-height: 70vh; /* Asegura que cada sección tenga un alto mínimo */
+        }
+        .content-section.active {
+            display: block; /* Solo la sección activa es visible */
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeInSlideUp 0.8s ease-out forwards; /* Aplicar a secciones activas */
+        }
+
+        /* Estilos específicos para cada sección (Inicio, Nosotros, Servicios, etc.) */
+        /* Hero Section (Ahora la sección "Inicio" en el contenido logueado) */
+        #home-section {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: var(--white-color);
+            text-align: center;
+            padding: 10rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* Asegura una altura mínima */
+            position: relative;
+        }
+
+        #home-section h1 {
+            font-size: 4.5em;
+            margin-bottom: 1rem;
+            color: var(--white-color);
+            line-height: 1.2;
+        }
+
+        #home-section p {
+            font-size: 1.6em;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        #about-section { background: var(--white-color); text-align: center; }
+        #about-section .about-content { display: flex; flex-direction: column; align-items: center; }
+        #about-section .about-text { max-width: 800px; margin-bottom: 2rem; }
+        #about-section .about-img { max-width: 350px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+
+        #services-section { background: var(--light-color); text-align: center; }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .service-item { background: var(--white-color); padding: 2.5rem; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .service-item:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .service-item i { font-size: 3.5em; color: var(--primary-color); margin-bottom: 1.5rem; }
+        .service-item h3 { font-size: 1.8em; }
+
+        #portfolio-section { background: var(--white-color); text-align: center; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .portfolio-card { background: var(--white-color); border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .portfolio-card:hover { transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .portfolio-card .card-img { width: 100%; height: 250px;
+            object-fit: cover; display: block; }
+        .portfolio-card .card-content { padding: 1.5rem; }
+        .portfolio-card .card-content h3 { font-size: 1.6em; margin-bottom: 0.8rem; }
+        .portfolio-card .card-content p { font-size: 1em; margin-bottom: 1rem; }
+
+        /* Estilos para el contenido de los detalles del proyecto en el modal */
+        .portfolio-detail-content {
+            padding: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin: auto;
+            background-color: var(--white-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .portfolio-detail-content h3 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .portfolio-detail-content p {
+            color: var(--dark-color);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .portfolio-detail-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        .portfolio-detail-content ul li {
+            margin-bottom: 5px;
+        }
+
+
+        #jobs-section { background: var(--light-color); text-align: center; }
+        .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .job-card { background: var(--white-color); padding: 2rem; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .job-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .job-card h3 { font-size: 1.8em; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .job-card p { margin-bottom: 0.5rem; font-size: 1.05em; }
+        .job-card .info-label { font-weight: 600; color: var(--dark-color); }
+        .job-card ul { list-style: disc; margin-left: 1.5rem; margin-top: 1rem; font-size: 0.95em; }
+
+        #cv-guide-section { background: var(--white-color); }
+        #cv-guide-section .guide-content { max-width: 900px; margin: 0 auto; text-align: left; }
+        #cv-guide-section .guide-content ol { list-style: decimal; margin-left: 1.5rem; margin-bottom: 2rem; }
+        #cv-guide-section .guide-content ol li { margin-bottom: 1rem; font-size: 1.1em; line-height: 1.6; }
+        #cv-guide-section .guide-content ol li strong { color: var(--primary-color); }
+        #cv-guide-section .guide-content ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; font-size: 1em; }
+
+
+        #contact-section { background: var(--dark-color); color: var(--white-color); text-align: center; }
+        #contact-section h2 { color: var(--white-color); }
+        #contact-section .contact-info { margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 2rem; }
+        #contact-section .contact-item { display: flex; flex-direction: column; align-items: center;
+            margin-bottom: 1rem; font-size: 1.2em; }
+        #contact-section .contact-item i { font-size: 2.5em; color: var(--primary-color);
+            margin-bottom: 1rem; }
+        #contact-section .contact-item a { color: var(--white-color); transition: color 0.3s ease; }
+        #contact-section .contact-item a:hover { color: var(--accent-color); }
+
+
+        /* Sección de Registro/Login (Modal al inicio) */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
+        }
+
+        #welcome-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #welcome-box {
+            background: var(--white-color);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        #welcome-overlay.visible #welcome-box {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        #welcome-box h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 2.5em;
+        }
+
+        #welcome-box .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        #welcome-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        #welcome-box input[type="text"],
+        #welcome-box input[type="email"],
+        #welcome-box input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #welcome-box input[type="text"]:focus,
+        #welcome-box input[type="email"]:focus,
+        #welcome-box input[type="password"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        #welcome-box .btn-auth {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2em;
+            margin-top: 1rem;
+        }
+
+        #welcome-box .message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            display: none; /* Oculto por defecto */
+        }
+
+        #welcome-box .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #welcome-box .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        #welcome-box .toggle-form {
+            margin-top: 1.5rem;
+            font-size: 0.95em;
+        }
+        #welcome-box .toggle-form a {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: none; /* Oculto por defecto, se muestra con JS después del login */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .footer.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Animaciones CSS */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos para el modal de precios */
+        #details-pricing {
+            text-align: center;
+            max-width: 400px;
+        }
+        #details-pricing h3 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        #details-pricing p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        #details-pricing strong {
+            color: var(--accent-color);
+        }
+
+
+        /* Media Queries para Responsividad Básica */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+            }
+
+            .navbar ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            #home-section h1 {
+                font-size: 3em;
+            }
+
+            #home-section p {
+                font-size: 1.2em;
+            }
+
+            .section-padding {
+                padding: 4rem 0;
+            }
+
+            .service-grid, .portfolio-grid, .job-grid {
+                grid-template-columns: 1fr; /* Una columna en móviles */
+            }
+
+            .portfolio-card .card-img {
+                height: 200px;
+            }
+
+            #welcome-box {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            h3 { font-size: 1.6em; }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- Hero Section -->
-    <header class="gradient-bg text-white py-20 px-4 sm:px-6 lg:px-8 text-center rounded-b-3xl shadow-lg">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl sm:text-6xl font-bold mb-4 leading-tight">TestEM</h1>
-            <p class="text-xl sm:text-2xl mb-8 opacity-90">
-                Descubre tus intereses, habilidades y recursos para encontrar tu idea de emprendimiento ideal.
-            </p>
-            <a href="#test-section" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-100 hover:scale-105 transition duration-300 ease-in-out">
-                ¡Haz tu Test Ahora!
-            </a>
-        </div>
-    </header>
-
-    <!-- How It Works Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
-        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">¿Cómo funciona TestEM?</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Step 1 -->
-            <div class="bg-blue-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <div class="text-5xl mb-4">📝</div>
-                <h3 class="text-2xl font-semibold mb-3 text-blue-700">1. Test Rápido</h3>
-                <p class="text-gray-700">
-                    Realiza un test de 10-15 minutos sobre tus intereses, habilidades, experiencias y contexto personal.
-                </p>
-            </div>
-            <!-- Step 2 -->
-            <div class="bg-green-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <div class="text-5xl mb-4">🧠</div>
-                <h3 class="text-2xl font-semibold mb-3 text-green-700">2. Análisis de Perfil</h3>
-                <p class="text-gray-700">
-                    Nuestro sistema analiza tus respuestas con algoritmos simples para crear tu perfil único.
-                </p>
-            </div>
-            <!-- Step 3 -->
-            <div class="bg-purple-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <div class="text-5xl mb-4">💡</div>
-                <h3 class="text-2xl font-semibold mb-3 text-purple-700">3. Recomendaciones Personalizadas</h3>
-                <p class="text-gray-700">
-                    Recibe de 3 a 5 ideas de emprendimiento realistas, con descripciones y recursos gratuitos.
-                </p>
-            </div>
-            <!-- Step 4 -->
-            <div class="bg-yellow-50 p-6 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <div class="text-5xl mb-4">🤝</div>
-                <h3 class="text-2xl font-semibold mb-3 text-yellow-700">4. Comunidad Opcional</h3>
-                <p class="text-gray-700">
-                    Accede a una comunidad de jóvenes emprendedores con mentorías y retos mensuales.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Example Result Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100 rounded-lg shadow-md mx-auto my-12 max-w-6xl">
-        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">Ejemplo de Resultado</h2>
-        <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-            <p class="text-lg mb-4">Imagina un perfil con:</p>
-            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
-                <li><span class="font-semibold text-blue-600">Intereses:</span> Cocina, redes sociales, impacto social</li>
-                <li><span class="font-semibold text-blue-600">Habilidades:</span> Creatividad, fotografía, comunicación</li>
-                <li><span class="font-semibold text-blue-600">Recurso clave:</span> Celular con buena cámara</li>
-            </ul>
-            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 shadow-inner">
-                <p class="text-xl font-semibold text-blue-800 mb-3">🔍 Idea Sugerida:</p>
-                <p class="text-lg text-gray-800">
-                    Miniemprendimiento de snacks saludables con marketing en TikTok y ventas en ferias escolares.
-                </p>
-            </div>
-            <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500 shadow-inner mt-6">
-                <p class="text-xl font-semibold text-green-800 mb-3">📚 Siguiente Paso:</p>
-                <p class="text-lg text-gray-800">
-                    Curso gratis de Canva + tutorial de empaque ecológico.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Test Section -->
-    <section id="test-section" class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
-        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">¡Haz tu Test TestEM!</h2>
-
-        <div id="test-intro" class="text-center">
-            <p class="text-lg mb-8">
-                Este test te ayudará a descubrir ideas de emprendimiento personalizadas. ¡Es rápido y divertido!
-            </p>
-            <button id="start-test-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 ease-in-out">
-                Comenzar Test
-            </button>
-        </div>
-
-        <form id="test-form" class="hidden mt-8 p-6 bg-gray-50 rounded-xl shadow-inner">
-            <!-- Interests -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-semibold mb-4 text-blue-700">1. ¿Cuáles son tus intereses principales? (Selecciona todos los que apliquen)</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="tecnologia" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Tecnología</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="arte" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Arte y Diseño</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="cocina" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Cocina y Gastronomía</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="deportes" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Deportes y Bienestar</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="impacto social" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Impacto Social / Ayuda</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200">
-                        <input type="checkbox" name="interests" value="redes sociales" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Redes Sociales / Marketing Digital</span>
-                    </label>
+    <div id="welcome-overlay">
+        <div id="welcome-box">
+            <h2 id="auth-title">Bienvenido a PRO ADMIN</h2>
+            <p id="auth-subtitle">Para acceder, por favor regístrate o inicia sesión.</p>
+            <form id="authForm">
+                <div class="form-group" id="name-group">
+                    <label for="authName">Nombre Completo:</label>
+                    <input type="text" id="authName" name="authName">
                 </div>
-            </div>
-
-            <!-- Skills -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-semibold mb-4 text-green-700">2. ¿Qué habilidades te describen mejor? (Selecciona todos los que apliquen)</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
-                        <input type="checkbox" name="skills" value="comunicacion" class="form-checkbox h-5 w-5 text-green-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Comunicación</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
-                        <input type="checkbox" name="skills" value="creatividad" class="form-checkbox h-5 w-5 text-green-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Creatividad</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
-                        <input type="checkbox" name="skills" value="liderazgo" class="form-checkbox h-5 w-5 text-green-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Liderazgo</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
-                        <input type="checkbox" name="skills" value="logica" class="form-checkbox h-5 w-5 text-green-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Lógica / Resolución de Problemas</span>
-                    </label>
-                    <label class="flex items-center p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-green-100 transition duration-200">
-                        <input type="checkbox" name="skills" value="fotografia" class="form-checkbox h-5 w-5 text-green-600 rounded">
-                        <span class="ml-3 text-lg text-gray-800">Fotografía / Edición de Video</span>
-                    </label>
+                <div class="form-group">
+                    <label for="authEmail">Correo Electrónico:</label>
+                    <input type="email" id="authEmail" name="authEmail" required>
                 </div>
+                <div class="form-group">
+                    <label for="authPassword">Contraseña:</label>
+                    <input type="password" id="authPassword" name="authPassword" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-auth" id="authSubmitBtn">Registrarme</button>
+                <div id="authMessage" class="message"></div>
+            </form>
+            <div class="toggle-form">
+                ¿Ya tienes una cuenta? <a href="#" id="toggleAuthMode">Inicia Sesión aquí.</a>
             </div>
+        </div>
+    </div>
 
-            <!-- Resources -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-semibold mb-4 text-purple-700">3. ¿Qué recursos tienes disponibles?</h3>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-lg mb-2 text-gray-800">¿Tienes un celular con buena cámara?</p>
-                        <label class="inline-flex items-center mr-4">
-                            <input type="radio" name="camera" value="si" class="form-radio h-5 w-5 text-purple-600">
-                            <span class="ml-2 text-lg text-gray-800">Sí</span>
-                        </label>
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="camera" value="no" class="form-radio h-5 w-5 text-purple-600">
-                            <span class="ml-2 text-lg text-gray-800">No</span>
-                        </label>
-                    </div>
-                    <div>
-                        <p class="text-lg mb-2 text-gray-800">¿Tienes acceso a internet confiable?</p>
-                        <label class="inline-flex items-center mr-4">
-                            <input type="radio" name="internet" value="si" class="form-radio h-5 w-5 text-purple-600">
-                            <span class="ml-2 text-lg text-gray-800">Sí</span>
-                        </label>
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="internet" value="no" class="form-radio h-5 w-5 text-purple-600">
-                            <span class="ml-2 text-lg text-gray-800">No</span>
-                        </label>
-                    </div>
-                    <div>
-                        <p class="text-lg mb-2 text-gray-800">¿Cuánto tiempo puedes dedicar a un emprendimiento?</p>
-                        <select name="time" class="block w-full sm:w-1/2 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg text-gray-800">
-                            <option value="">Selecciona una opción</option>
-                            <option value="poco">Poco (menos de 5 horas/semana)</option>
-                            <option value="moderado">Moderado (5-15 horas/semana)</option>
-                            <option value="mucho">Mucho (más de 15 horas/semana)</option>
-                        </select>
+    <div id="main-wrapper">
+        <header>
+            <nav class="navbar">
+                <div class="container">
+                    <div class="logo">PRO ADMIN</div>
+                    <ul class="nav-links">
+                        <li><a href="#" data-section="home-section">Inicio</a></li>
+                        <li><a href="#" data-section="about-section">Nosotros</a></li>
+                        <li><a href="#" data-section="services-section">Servicios</a></li>
+                        <li><a href="#" data-section="portfolio-section">Portafolio</a></li>
+                        <li><a href="#" data-section="jobs-section">Trabajos</a></li>
+                        <li><a href="#" data-section="cv-guide-section">Tu CV</a></li>
+                        <li><a href="#" data-section="contact-section">Contacto</a></li>
+                        <li><a href="#" id="logoutBtn">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <section id="home-section" class="section-padding content-section active">
+                <div class="container">
+                    <h1>Tu Impulso Profesional Empieza Aquí</h1>
+                    <p>Ofrecemos soluciones innovadoras para potenciar tu carrera y negocio. ¡Descubre cómo podemos ayudarte a alcanzar tus metas!</p>
+                    <a href="#" class="btn" id="exploreServicesBtn">Explora Nuestros Servicios</a>
+                </div>
+            </section>
+
+            <section id="about-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Acerca de Nosotros</h2>
+                    <div class="about-content">
+                        <img src="https://via.placeholder.com/350x300?text=Equipo+PRO+ADMIN" alt="Equipo de PRO ADMIN" class="about-img">
+                        <div class="about-text">
+                            <p>En PRO ADMIN, somos un equipo apasionado conformado por <strong>Joaquín, Domenika, Víctor y Madeley</strong>, dedicados a transformar ideas en realidades. Con años de experiencia en el sector, nos especializamos en brindar asesoría y herramientas personalizadas para individuos y empresas que buscan crecer en un mercado competitivo.</p>
+                            <p>Nuestra misión es empoderarte, ofreciéndote soluciones estratégicas y soporte continuo para que superes tus desafíos y alcances el éxito. Creemos en el trabajo colaborativo, la innovación constante y la excelencia en cada proyecto.</p>
+                            <p>Nos enorgullece ser un pilar para el desarrollo profesional y empresarial en Perú, apostando por la digitalización y la optimización de procesos para un futuro más eficiente y prometedor, si quieres saber mas informacion escribirnos al WhatsApp cobramos 15 soles por consulta con un especialista.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="text-center">
-                <button type="submit" class="bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-700 hover:scale-105 transition duration-300 ease-in-out">
-                    Ver mis Recomendaciones
-                </button>
-            </div>
-        </form>
-
-        <!-- Loading and Results Section -->
-        <div id="test-loading" class="hidden text-center mt-8 p-6 bg-blue-50 rounded-xl shadow-inner">
-            <div class="spinner mx-auto mb-4"></div>
-            <p class="text-xl font-semibold text-blue-700">Analizando tu perfil...</p>
-            <p class="text-gray-700">Esto puede tardar unos segundos.</p>
-        </div>
-
-        <div id="test-results" class="hidden mt-8 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
-            <h3 class="text-3xl font-bold text-center mb-6 text-blue-800">Tus Recomendaciones Personalizadas</h3>
-            <div id="result-content">
-                <!-- Results will be injected here by JavaScript -->
-            </div>
-            <div class="text-center mt-8">
-                <button id="retake-test-btn" class="bg-gray-400 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-500 transition duration-300 ease-in-out">
-                    Volver a hacer el Test
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Advantages Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-md mx-auto my-12 max-w-6xl">
-        <h2 class="text-4xl font-bold text-center mb-12 section-heading mx-auto">Ventajas del Proyecto</h2>
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div class="flex items-start bg-purple-50 p-6 rounded-xl shadow-md">
-                <div class="text-3xl text-purple-600 mr-4 mt-1">💰</div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2 text-purple-700">Bajo Costo de Desarrollo</h3>
-                    <p class="text-gray-700">Se puede iniciar con herramientas gratuitas como Google Forms o Typeform.</p>
+            <section id="services-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Nuestros Servicios</h2>
+                    <p class="text-center">Diseñados para impulsarte hacia el éxito.</p>
+                    <div class="service-grid">
+                        <div class="service-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Consultoría Estratégica</h3>
+                            <p>Asesoramiento experto para definir y ejecutar tus objetivos de negocio.</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-code"></i>
+                            <h3>Desarrollo Web y Móvil</h3>
+                            <p>Creación de sitios web modernos, responsivos y aplicaciones móviles innovadoras.</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Marketing Digital Integral</h3>
+                            <p>Estrategias de SEO, SEM, redes sociales y contenido para aumentar tu visibilidad y ventas.</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Diseño Gráfico y Branding</h3>
+                            <p>Creación de identidades visuales, logotipos y material de marketing impactante que resuene con tu audiencia.</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-users"></i>
+                            <h3>Capacitación y Workshops</h3>
+                            <p>Programas de formación personalizados y talleres prácticos para desarrollar nuevas habilidades y competencias.</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-headset"></i>
+                            <h3>Soporte Técnico y Mantenimiento</h3>
+                            <p>Asistencia continua y mantenimiento para asegurar el correcto funcionamiento de tus sistemas y plataformas digitales.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex items-start bg-red-50 p-6 rounded-xl shadow-md">
-                <div class="text-3xl text-red-600 mr-4 mt-1">🏫</div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2 text-red-700">Adaptable y Versátil</h3>
-                    <p class="text-gray-700">Ideal para colegios, institutos y programas sociales.</p>
-                </div>
-            </div>
-            <div class="flex items-start bg-teal-50 p-6 rounded-xl shadow-md">
-                <div class="text-3xl text-teal-600 mr-4 mt-1">✨</div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2 text-teal-700">Fomenta la Autoconfianza</h3>
-                    <p class="text-gray-700">Facilita la orientación vocacional hacia el emprendimiento.</p>
-                </div>
-            </div>
-            <div class="flex items-start bg-indigo-50 p-6 rounded-xl shadow-md">
-                <div class="text-3xl text-indigo-600 mr-4 mt-1">📈</div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2 text-indigo-700">Potencial de Escalabilidad</h3>
-                    <p class="text-gray-700">Capacidad para crecer a niveles regionales o nacionales.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 text-center rounded-t-3xl shadow-lg mt-12">
-        <p>&copy; 2025 TestEM. Todos los derechos reservados.</p>
-    </footer>
+            <section id="portfolio-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Nuestro Portafolio</h2>
+                    <p class="text-center">Proyectos exitosos que demuestran nuestro compromiso y calidad.</p>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-card">
+                            <a href="https://via.placeholder.com/800x600/007bff/ffffff?text=Sitio+Web+Corporativo+Ampliado" data-featherlight="image">
+                                <img src="https://via.placeholder.com/400x250/007bff/ffffff?text=Sitio+Web+Corporativo" alt="Sitio Web Corporativo" class="card-img">
+                            </a>
+                            <div class="card-content">
+                                <h3>Sitio Web Corporativo</h3>
+                                <p>Desarrollo de una plataforma interactiva para una empresa líder en su sector.</p>
+                                <a href="#" class="btn btn-small view-details" data-target-modal="#details-proyecto1">Detalles</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card">
+                            <a href="https://via.placeholder.com/800x600/28a745/ffffff?text=Aplicacion+Movil+E-commerce+Ampliada" data-featherlight="image">
+                                <img src="https://via.placeholder.com/400x250/28a745/ffffff?text=Aplicacion+Movil+E-commerce" alt="Aplicación Móvil E-commerce" class="card-img">
+                            </a>
+                            <div class="card-content">
+                                <h3>Aplicación Móvil E-commerce</h3>
+                                <p>Diseño y desarrollo de una aplicación intuitiva para ventas en línea.</p>
+                                <a href="#" class="btn btn-small view-details" data-target-modal="#details-proyecto2">Detalles</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card">
+                            <a href="https://via.placeholder.com/800x600/6c757d/ffffff?text=Campania+Marketing+Digital+Ampliada" data-featherlight="image">
+                                <img src="https://via.placeholder.com/400x250/6c757d/ffffff?text=Campania+Marketing+Digital" alt="Campaña de Marketing Digital" class="card-img">
+                            </a>
+                            <div class="card-content">
+                                <h3>Campaña de Marketing Digital</h3>
+                                <p>Estrategia integral de SEO y SEM con resultados comprobados.</p>
+                                <a href="#" class="btn btn-small view-details" data-target-modal="#details-proyecto3">Detalles</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card">
+                            <a href="https://via.placeholder.com/800x600/ffc107/ffffff?text=Branding+Empresarial+Ampliado" data-featherlight="image">
+                                <img src="https://via.placeholder.com/400x250/ffc107/ffffff?text=Branding+Empresarial" alt="Branding Empresarial" class="card-img">
+                            </a>
+                            <div class="card-content">
+                                <h3>Branding Empresarial Completo</h3>
+                                <p>Creación de identidad visual y manual de marca para startup.</p>
+                                <a href="#" class="btn btn-small view-details" data-target-modal="#details-proyecto4">Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            <section id="jobs-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Oportunidades Laborales en Perú</h2>
+                    <p class="text-center">Descubre posibles caminos profesionales y estima tus ingresos.</p>
+                    <div class="job-grid">
+                        <div class="job-card">
+                            <h3>Ingeniero de Software Senior</h3>
+                            <p><span class="info-label">Empresa:</span> Tech Innova Solutions</p>
+                            <p><span class="info-label">Ubicación:</span> Lima, Perú</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 5,000 - S/ 10,000 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> Indefinido</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Desarrollo y mantenimiento de aplicaciones web escalables.</li>
+                                <li>Colaboración en equipos ágiles.</li>
+                                <li>Experiencia en frameworks como React o Angular.</li>
+                            </ul>
+                        </div>
+                        <div class="job-card">
+                            <h3>Especialista en Marketing Digital</h3>
+                            <p><span class="info-label">Empresa:</span> Agencia Marketing Pro</p>
+                            <p><span class="info-label">Ubicación:</span> Arequipa, Perú</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 2,500 - S/ 4,500 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> A plazo fijo (1 año con opción a renovación)</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Gestión de campañas publicitarias en redes sociales y Google Ads.</li>
+                                <li>Análisis de métricas y elaboración de reportes.</li>
+                                <li>Creación de contenido digital persuasivo.</li>
+                            </ul>
+                        </div>
+                        <div class="job-card">
+                            <h3>Diseñador Gráfico Junior</h3>
+                            <p><span class="info-label">Empresa:</span> Creativos Andinos</p>
+                            <p><span class="info-label">Ubicación:</span> Cusco, Perú</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 1,800 - S/ 2,800 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> Part-time (25 horas/semana), indefinido</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Diseño de logotipos, folletos y material publicitario.</li>
+                                <li>Colaboración en proyectos de branding.</li>
+                                <li>Manejo de herramientas Adobe Creative Suite.</li>
+                            </ul>
+                        </div>
+                        <div class="job-card">
+                            <h3>Analista de Datos</h3>
+                            <p><span class="info-label">Empresa:</span> Data Insights Corp</p>
+                            <p><span class="info-label">Ubicación:</span> Lima, Perú (Remoto posible)</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 4,000 - S/ 7,000 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> Indefinido</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Recolección, limpieza y análisis de grandes volúmenes de datos.</li>
+                                <li>Creación de dashboards e informes con Power BI o Tableau.</li>
+                                <li>Conocimiento de SQL y Python/R.</li>
+                            </ul>
+                        </div>
+                        <div class="job-card">
+                            <h3>Administrador de Redes y Sistemas</h3>
+                            <p><span class="info-label">Empresa:</span> Soluciones IT Perú</p>
+                            <p><span class="info-label">Ubicación:</span> Callao, Perú</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 3,000 - S/ 5,500 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> Indefinido</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Mantenimiento de infraestructura de red y servidores.</li>
+                                <li>Soporte técnico a usuarios internos.</li>
+                                <li>Experiencia con sistemas operativos Linux y Windows Server.</li>
+                            </ul>
+                        </div>
+                        <div class="job-card">
+                            <h3>Contador Junior</h3>
+                            <p><span class="info-label">Empresa:</span> Asesoría Contable Norte</p>
+                            <p><span class="info-label">Ubicación:</span> Trujillo, Perú</p>
+                            <p><span class="info-label">Salario Estimado:</span> S/ 1,800 - S/ 2,700 PEN/mes</p>
+                            <p><span class="info-label">Tipo de Contrato:</span> A plazo fijo (6 meses iniciales)</p>
+                            <p>Descripción:</p>
+                            <ul>
+                                <li>Registro de operaciones contables.</li>
+                                <li>Elaboración de conciliaciones bancarias.</li>
+                                <li>Apoyo en la preparación de estados financieros.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-center" style="margin-top: 3rem; font-size: 0.9em;">*Los salarios son estimaciones y pueden variar según la experiencia, la empresa y la negociación.</p>
+                </div>
+            </section>
+
+            <section id="cv-guide-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Guía Detallada para Crear tu Currículum Vitae (CV)</h2>
+                    <p class="text-center">Un buen CV es tu primera impresión. Aprende a crear uno que destaque.</p>
+                    <div class="guide-content">
+                        <h3>1. Estructura Básica de un CV Exitoso:</h3>
+                        <ol>
+                            <li>
+                                <strong>Datos Personales y de Contacto:</strong>
+                                <ul>
+                                    <li>Nombre completo y claro.</li>
+                                    <li>Número de teléfono (con código de país si es necesario).</li>
+                                    <li>Correo electrónico profesional.</li>
+                                    <li>Enlace a tu perfil de LinkedIn (muy recomendado).</li>
+                                    <li>Opcional: Enlace a portafolio online o GitHub si aplica a tu carrera.</li>
+                                    <li>NO incluyas: Estado civil, número de hijos, DNI (a menos que lo pidan explícitamente), foto (a menos que sea una práctica estándar en tu industria).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Perfil Profesional / Resumen (Opcional pero recomendado):</strong>
+                                <ul>
+                                    <li>Un párrafo conciso (3-5 líneas) que resuma tu experiencia, habilidades clave y objetivos de carrera.</li>
+                                    <li>Adapta este resumen a la oferta de trabajo a la que postulas, usando palabras clave de la descripción del puesto.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Experiencia Profesional:</strong>
+                                <ul>
+                                    <li>Lista tus empleos en orden cronológico inverso (el más reciente primero).</li>
+                                    <li>Para cada puesto, incluye:
+                                        <ul>
+                                            <li>Nombre del puesto.</li>
+                                            <li>Nombre de la empresa.</li>
+                                            <li>Ciudad y País.</li>
+                                            <li>Fechas de inicio y fin (mes/año).</li>
+                                        </ul>
+                                    </li>
+                                    <li>Utiliza viñetas para describir tus responsabilidades y, lo más importante, ¡tus LOGROS! Cuantifica tus logros siempre que sea posible (ej. "Aumenté las ventas en un 15%", "Reduje costos operativos en S/10,000").</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Formación Académica:</strong>
+                                <ul>
+                                    <li>Lista tus grados académicos en orden cronológico inverso.</li>
+                                    <li>Incluye:
+                                        <ul>
+                                            <li>Nombre del título (ej. Bachiller en Ingeniería de Sistemas).</li>
+                                            <li>Nombre de la universidad o institución.</li>
+                                            <li>Ciudad y País.</li>
+                                            <li>Fechas de inicio y fin (o fecha de graduación).</li>
+                                        </ul>
+                                    </li>
+                                    <li>Puedes incluir reconocimientos, becas o proyectos relevantes.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Habilidades:</strong>
+                                <ul>
+                                    <li>Divide las habilidades en categorías:
+                                        <ul>
+                                            <li><strong>Habilidades Técnicas (Hard Skills):</strong> Software, lenguajes de programación, idiomas, herramientas específicas (ej. Microsoft Excel, Python, SEO, Photoshop, SAP).</li>
+                                            <li><strong>Habilidades Blandas (Soft Skills):</strong> Comunicación, trabajo en equipo, resolución de problemas, liderazgo, adaptabilidad, proactividad.</li>
+                                        </ul>
+                                    </li>
+                                    <li>Sé específico. En lugar de "Ofimática", pon "Microsoft Word, Excel (nivel avanzado), PowerPoint".</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Idiomas (Si Aplica):</strong>
+                                <ul>
+                                    <li>Menciona los idiomas que dominas y tu nivel (básico, intermedio, avanzado, nativo).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Cursos y Certificaciones (Opcional):</strong>
+                                <ul>
+                                    <li>Cualquier curso relevante, taller o certificación que complemente tu perfil y sea pertinente para el puesto.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <h3>2. Consejos Clave para un CV Impactante:</h3>
+                        <ul>
+                            <li><strong>Personaliza tu CV:</strong> Ajusta tu CV para cada oferta de trabajo. Resalta las habilidades y experiencias que son más relevantes para ese puesto específico. Usa palabras clave de la descripción del puesto.</li>
+                            <li><strong>Formato Limpio y Profesional:</strong>
+                                <ul>
+                                    <li>Utiliza una fuente legible (ej. Arial, Calibri, Poppins).</li>
+                                    <li>Mantén márgenes adecuados y un espaciado uniforme.</li>
+                                    <li>Usa negritas para títulos de secciones y puestos.</li>
+                                    <li>Sé consistente con el formato.</li>
+                                </ul>
+                            </li>
+                            <li> <strong>Sé Conciso:</strong> Lo ideal es un CV de 1 a 2 páginas para la mayoría de los profesionales. Los reclutadores dedican solo unos segundos a cada CV.</li>
+                            <li><strong>Errores Cero:</strong> Revisa y corrige cualquier error ortográfico o gramatical. Pide a alguien más que lo revise.</li>
+                            <li><strong>Palabras Clave:</strong> Muchos sistemas de reclutamiento (ATS) buscan palabras clave. Asegúrate de incluir las relevantes para tu industria y el puesto deseado.</li>
+                            <li><strong>Formato PDF:</strong> Siempre envía tu CV en formato PDF, a menos que se indique lo contrario. Esto asegura que el formato se mantenga intacto.</li>
+                            <li><strong>Actualiza Regularmente:</strong> Mantén tu CV al día, añadiendo nuevas experiencias, habilidades o logros.</li>
+                        </ul>
+                        <p style="margin-top: 2rem;">¡Un CV bien elaborado es tu boleto de entrada a la entrevista! Invierte tiempo en él y verás los resultados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-section" class="section-padding content-section">
+                <div class="container">
+                    <h2 class="text-center">Contáctanos</h2>
+                    <p class="text-center">Estamos listos para escuchar tus ideas y ayudarte a hacerlas realidad.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Av. Principal 123, Ciudad del Éxito</p>
+                            <p>Perú</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <p><a href="tel:+51987654321">+51 987 654 321</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:info@proadmin.com">info@proadmin.com</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <p><a href="https://wa.me/51987654321" target="_blank">Envíanos un WhatsApp</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="portfolio-detail-content" id="details-pricing" style="display: none; text-align: center;">
+                <h3>Información Importante</h3>
+                <p>Si quieren más información, por favor <strong>contáctanos.</strong></p>
+                <p>Nuestros servicios tienen un costo de <strong>S/ 15 soles por mes.</strong></p>
+                <button class="btn btn-small close-featherlight" data-featherlight-close>Entendido</button>
+            </div>
+
+
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 PRO ADMIN. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="portfolio-detail-content" id="details-proyecto1" style="display: none;">
+        <h3>Detalles del Sitio Web Corporativo</h3>
+        <p><strong>Descripción:</strong> Desarrollo de un sitio web corporativo completo para "Global Solutions S.A.", diseñado para modernizar su presencia digital y mejorar la interacción con sus clientes. El proyecto se centró en la creación de una plataforma robusta, escalable y visualmente atractiva.</p>
+        <p><strong>Tecnologías Usadas:</strong></p>
+        <ul>
+            <li>Front-end: HTML5, CSS3 (con SASS), JavaScript (React.js)</li>
+            <li>Back-end: Node.js (Express.js)</li>
+            <li>Base de Datos: MongoDB</li>
+            <li>Otros: Integración con API de CRM, optimización SEO.</li>
+        </ul>
+        <p><strong>Resultados Clave:</strong></p>
+        <ul>
+            <li>Aumento del tráfico web en un 40% en los primeros 3 meses.</li>
+            <li>Mejora de la tasa de conversión de formularios en un 25%.</li>
+            <li>Diseño totalmente responsivo, adaptable a cualquier dispositivo.</li>
+        </ul>
+        <p>Este proyecto destacó por su enfoque en la experiencia de usuario y la implementación de funcionalidades personalizadas que facilitaron la gestión de contenidos y la relación con los clientes.</p>
+    </div>
+
+    <div class="portfolio-detail-content" id="details-proyecto2" style="display: none;">
+        <h3>Detalles de la Aplicación Móvil E-commerce</h3>
+        <p><strong>Descripción:</strong> Creación de una aplicación móvil de e-commerce para "Fashion Trends", una tienda de moda. La aplicación permite a los usuarios navegar por el catálogo, añadir productos al carrito y realizar compras de manera segura y eficiente desde sus dispositivos móviles.</p>
+        <p><strong>Tecnologías Usadas:</strong></p>
+        <ul>
+            <li>Mobile: React Native</li>
+            <li>Backend: Firebase</li>
+            <li>Integraciones: Pasarela de pagos (ej. Mercado Pago, Culqi), notificaciones push.</li>
+        </ul>
+        <p><strong>Resultados Clave:</strong></p>
+        <ul>
+            <li>Lanzamiento exitoso en iOS y Android con una excelente acogida.</li>
+            <li>Aumento de ventas móviles en un 30% en el primer trimestre.</li>
+            <li>Valoración promedio de 4.8 estrellas en las tiendas de aplicaciones, reflejando la satisfacción del usuario.</li>
+            <li>Optimización del proceso de compra, reduciendo el abandono de carrito.</li>
+        </ul>
+        <p>El éxito de esta aplicación se basó en una interfaz de usuario intuitiva, un rendimiento fluido y una integración de funcionalidades clave que mejoraron la experiencia de compra del cliente.</p>
+    </div>
+
+    <div class="portfolio-detail-content" id="details-proyecto3" style="display: none;">
+        <h3>Detalles de la Campaña de Marketing Digital</h3>
+        <p><strong>Descripción:</strong> Desarrollo e implementación de una campaña de marketing digital 360° para "Healthy Bites", una marca de alimentos saludables. El objetivo fue aumentar la visibilidad de la marca y la interacción con su público objetivo a través de diversos canales digitales.</p>
+        <p><strong>Estrategias Implementadas:</strong></p>
+        <ul>
+            <li>SEO (Optimización para motores de búsqueda): Investigación de palabras clave, optimización on-page y off-page.</li>
+            <li>SEM (Marketing en motores de búsqueda): Campañas de Google Ads con segmentación precisa.</li>
+            <li>Social Media Marketing: Gestión de redes sociales (Instagram, Facebook), creación de contenido orgánico y campañas de anuncios.</li>
+            <li>Email Marketing: Diseño y envío de newsletters informativos y promocionales.</li>
+        </ul>
+        <p><strong>Resultados Clave:</strong></p>
+        <ul>
+            <li>Incremento del tráfico orgánico en un 60%.</li>
+            <li>Reducción del costo por clic (CPC) en un 20% en Google Ads.</li>
+            <li>Aumento del engagement en redes sociales en un 45%.</li>
+            <li>Base de suscriptores de email duplicada en 6 meses.</li>
+        </ul>
+        <p>Esta campaña integral permitió a "Healthy Bites" alcanzar una mayor audiencia y fortalecer su presencia en el mercado digital, traduciéndose en un crecimiento significativo en ventas y reconocimiento de marca.</p>
+    </div>
+
+    <div class="portfolio-detail-content" id="details-proyecto4" style="display: none;">
+        <h3>Detalles de Branding Empresarial Completo</h3>
+        <p><strong>Descripción:</strong> Proyecto integral de branding para "Innovate Solutions", una startup de tecnología. El objetivo fue crear una identidad de marca sólida y memorable que refleje sus valores de innovación, fiabilidad y modernidad, desde el logotipo hasta la aplicación en diversos materiales.</p>
+        <p><strong>Elementos Desarrollados:</strong></p>
+        <ul>
+            <li><strong>Logotipo Principal y Variaciones:</strong> Diseño de un logotipo distintivo y sus versiones para diferentes usos (web, impresión, formatos verticales/horizontales).</li>
+            <li><strong>Paleta de Colores:</strong> Definición de colores primarios y secundarios, incluyendo sus códigos (HEX, RGB, CMYK) para asegurar consistencia.</li>
+            <li><strong>Tipografía:</strong> Selección de fuentes para títulos y cuerpo de texto, garantizando legibilidad y personalidad.</li>
+            <li><strong>Guía de Estilo Visual:</strong> Documento completo con reglas de uso del logotipo, colores, tipografías, iconografía y patrones gráficos.</li>
+            <li><strong>Materiales de Marketing Iniciales:</strong> Diseño de tarjetas de presentación, membretes, firmas de email y plantillas para presentaciones.</li>
+            <li><strong>Imágenes de Marca:</strong> Propuesta de estilo fotográfico e ilustrativo para la comunicación visual.</li>
+        </ul>
+        <p><strong>Impacto:</strong></p>
+        <ul>
+            <li>La nueva identidad visual fue clave para el lanzamiento exitoso de la startup, facilitando el reconocimiento y la diferenciación en un mercado competitivo.</li>
+            <li>Se logró una coherencia visual en todos los puntos de contacto de la marca, transmitiendo profesionalismo y confianza a los clientes e inversores.</li>
+        </ul>
+        <p>Este proyecto sentó las bases para la comunicación de "Innovate Solutions", proporcionándoles un sistema visual robusto para su crecimiento futuro.</p>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const startTestBtn = document.getElementById('start-test-btn');
-            const testIntro = document.getElementById('test-intro');
-            const testForm = document.getElementById('test-form');
-            const testLoading = document.getElementById('test-loading');
-            const testResults = document.getElementById('test-results');
-            const resultContent = document.getElementById('result-content');
-            const retakeTestBtn = document.getElementById('retake-test-btn');
+        document.addEventListener('DOMContentLoaded', function() {
+            const authForm = document.getElementById('authForm');
+            const toggleAuthModeLink = document.getElementById('toggleAuthMode');
+            const authTitle = document.getElementById('auth-title');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            const nameGroup = document.getElementById('name-group');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+            const authMessage = document.getElementById('authMessage');
+            const welcomeOverlay = document.getElementById('welcome-overlay');
+            const mainWrapper = document.getElementById('main-wrapper');
+            const navbar = document.querySelector('.navbar');
+            const footer = document.querySelector('.footer');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const contentSections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+            const exploreServicesBtn = document.getElementById('exploreServicesBtn');
+            const portfolioDetailButtons = document.querySelectorAll('.view-details');
 
-            // Show the test form when "Comenzar Test" is clicked
-            startTestBtn.addEventListener('click', () => {
-                testIntro.classList.add('hidden');
-                testForm.classList.remove('hidden');
-                // Scroll to the test section
-                document.getElementById('test-section').scrollIntoView({ behavior: 'smooth' });
+
+            let isRegisterMode = true; // True for Register, False for Login
+
+            function toggleAuthUI(registerMode) {
+                isRegisterMode = registerMode;
+                if (isRegisterMode) {
+                    authTitle.textContent = 'Bienvenido a PRO ADMIN';
+                    authSubtitle.textContent = 'Para acceder, por favor regístrate o inicia sesión.';
+                    nameGroup.style.display = 'block';
+                    authSubmitBtn.textContent = 'Registrarme';
+                    toggleAuthModeLink.textContent = 'Inicia Sesión aquí.';
+                } else {
+                    authTitle.textContent = 'Iniciar Sesión';
+                    authSubtitle.textContent = 'Ingresa tus credenciales para continuar.';
+                    nameGroup.style.display = 'none';
+                    authSubmitBtn.textContent = 'Iniciar Sesión';
+                    toggleAuthModeLink.textContent = 'Regístrate aquí.';
+                }
+                authMessage.style.display = 'none'; // Hide message on mode change
+                // Clear form fields on mode change for cleaner UX
+                authForm.reset();
+            }
+
+            toggleAuthModeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleAuthUI(!isRegisterMode);
             });
 
-            // Handle test form submission
-            testForm.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent default form submission
+            authForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-                testForm.classList.add('hidden');
-                testLoading.classList.remove('hidden');
+                const email = document.getElementById('authEmail').value;
+                const password = document.getElementById('authPassword').value;
+                const name = document.getElementById('authName') ? document.getElementById('authName').value : '';
 
-                // Simulate API call or complex analysis with a delay
+                if (!isValidEmail(email)) {
+                    showMessage('Por favor, introduce un correo electrónico válido.', 'error');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showMessage('La contraseña debe tener al menos 6 caracteres.', 'error');
+                    return;
+                }
+
+                if (isRegisterMode && name.trim() === '') {
+                    showMessage('Por favor, introduce tu nombre completo.', 'error');
+                    return;
+                }
+
+                // Simulate API call
                 setTimeout(() => {
-                    const formData = new FormData(testForm);
-                    const interests = formData.getAll('interests');
-                    const skills = formData.getAll('skills');
-      
+                    if (isRegisterMode) {
+                        // Simulate registration success
+                        // In a real app, you'd send this to a server
+                        if (!localStorage.getItem('userEmail')) { // Only register if no user exists
+                            localStorage.setItem('userEmail', email);
+                            localStorage.setItem('userPassword', password);
+                            localStorage.setItem('userLoggedIn', 'true');
+                            showMessage('Registro exitoso. ¡Bienvenido!', 'success');
+                            transitionToMainContent();
+                        } else {
+                            showMessage('Ya existe una cuenta con este correo. Por favor, inicia sesión.', 'error');
+                        }
+                    } else {
+                        // Simulate login
+                        const storedEmail = localStorage.getItem('userEmail');
+                        const storedPassword = localStorage.getItem('userPassword');
+
+                        if (email === storedEmail && password === storedPassword) {
+                            localStorage.setItem('userLoggedIn', 'true'); // Ensure login state is updated
+                            showMessage('Inicio de sesión exitoso. ¡Bienvenido de nuevo!', 'success');
+                            transitionToMainContent();
+                        } else {
+                            showMessage('Correo o contraseña incorrectos.', 'error');
+                        }
+                    }
+                }, 1000);
+            });
+
+            function transitionToMainContent() {
+                welcomeOverlay.classList.remove('visible');
+                // Give a short delay for the overlay to animate out before showing main content
+                setTimeout(() => {
+                    mainWrapper.classList.add('visible');
+                    navbar.classList.add('visible'); // Show navbar
+                    footer.classList.add('visible'); // Show footer
+
+                    // Activate home section after login
+                    showSection('home-section');
+                    setActiveLink('home-section');
+                }, 500); // Match overlay transition duration
+            }
+
+            function showSection(sectionId) {
+                contentSections.forEach(section => {
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                        // Ensure animation is re-triggered on display:block
+                        section.style.animation = 'none';
+                        void section.offsetWidth; // Trigger reflow
+                        section.style.animation = null;
+                    } else {
+                        section.classList.remove('active');
+                        section.style.animation = 'none'; // Clear animation for hidden sections
+                    }
+                });
+                // Scroll to the top of the section after displaying it
+                setTimeout(() => {
+                    const sectionToShow = document.getElementById(sectionId);
+                    if (sectionToShow) {
+                        sectionToShow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            }
+
+            function setActiveLink(sectionId) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+
+            // Check if user is already logged in
+            if (localStorage.getItem('userLoggedIn') === 'true') {
+                transitionToMainContent();
+            } else {
+                welcomeOverlay.classList.add('visible');
+                toggleAuthUI(true); // Default to register mode
+            }
+
+            // Handle navigation for menu links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSectionId = this.getAttribute('data-section');
+                    showSection(targetSectionId);
+                    setActiveLink(targetSectionId);
+                });
+            });
+
+            // Handle "Explora Nuestros Servicios" button
+            exploreServicesBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Open the pricing modal using Featherlight
+                $.featherlight($('#details-pricing'), {
+                    // This callback fires AFTER the modal is closed by the user
+                    afterClose: function() {
+                        // Then navigate to the services section
+                        showSection('services-section');
+                        setActiveLink('services-section');
+                    }
+                });
+            });
+
+            // Handle Portfolio "Detalles" buttons
+            portfolioDetailButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetModalId = this.getAttribute('data-target-modal');
+                    $.featherlight($(targetModalId));
+                });
+            });
+
+
+            // Handle logout button
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('userLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPassword');
+
+                mainWrapper.classList.remove('visible'); // Hide main content
+                navbar.classList.remove('visible'); // Hide navbar using class
+                footer.classList.remove('visible'); // Hide footer
+
+                welcomeOverlay.classList.add('visible'); // Show welcome/login screen
+                toggleAuthUI(true); // Reset to register mode
+
+                // Ensure all content sections are hidden
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    section.style.animation = 'none';
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(20px)';
+                });
+                 // Remove active link class from all nav items
+                 navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                });
+            });
+
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function showMessage(msg, type) {
+                authMessage.textContent = msg;
+                authMessage.className = `message ${type}`;
+                authMessage.style.display = 'block';
+                setTimeout(() => {
+                    authMessage.style.display = 'none';
+                    authMessage.textContent = '';
+                }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>  
+    
+         
